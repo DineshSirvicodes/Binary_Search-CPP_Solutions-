@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int possible(vector<int> &bloomDay,int day,int m,int k ){
+    bool possible(vector<int> &bloomDay,int day,int m,int k ){
         int cnt = 0;
         int NumofB = 0;
         for(int i = 0 ; i<bloomDay.size(); i++){
