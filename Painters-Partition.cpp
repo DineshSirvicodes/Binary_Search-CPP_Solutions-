@@ -1,4 +1,5 @@
 // Problem solution for Painter's Partition and Split-Array Largest Sum same as of Book Allocation Problem
+//Optimal Solution
 int FindPainters(vector<int> &boards,int painters){
     int person = 1 , personperboard = 0;
     for(int i = 0 ; i<boards.size(); i++){
