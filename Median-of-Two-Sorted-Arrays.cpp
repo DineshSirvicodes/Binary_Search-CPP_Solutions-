@@ -25,7 +25,7 @@ double median(vector<int>& a, vector<int>& b) {
     return median;
 }
 
-// Better Solution: 
+// Better Solution: Reducing Space Complexity
 double median(vector<int>& a, vector<int>& b) {
     //size of two given arrays:
     int n1 = a.size(), n2 = b.size();
