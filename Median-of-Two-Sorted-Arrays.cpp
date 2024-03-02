@@ -74,3 +74,39 @@ double median(vector<int>& a, vector<int>& b) {
 
     return (double)((double)(ind1el + ind2el)) / 2.0; // for even
 }
+
+// Optimal Sol  Binary Search  TC - O(logn1/logn2) = O(log(n1+n2))
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
+        int n1 = a.size();
+        int n2 = b.size();
+        //if n1 is bigger swap the arrays:
+        if (n1 > n2) return findMedianSortedArrays(b, a); // we want the a array to be small and 
+                                            //perform BS on this
+        int low = 0 , high = n1;
+        int n = n1+n2;
+        int left = (n1+n2+1)/2;  // picking up elements to divide the left and right segments
+        while(low<=high){
+            int mid1 = (low+high)>>1; // (low+high)/2
+            int mid2 = left - mid1; //(right side)
+            int l1 = INT_MIN,l2 = INT_MIN; // l1 for arr1 and l2 for arr2
+            int r1 = INT_MAX, r2 = INT_MAX; // r1 for arr1 and r2 for arr2
+            if(mid1<n1) r1 = a[mid1]; // should not exceed the boundaries
+            if(mid2<n2) r2 = b[mid2];
+            
+            if(mid1-1>=0) l1 = a[mid1-1]; // should not exceed the boundaries
+            if(mid2-1>=0) l2 = b[mid2-1];
+
+            if(l1 <= r2 && l2<=r1) { // this condition will satisfy the left part as smaller to right part
+                // odd size n1+n2
+                if(n%2 == 1) return max(l1,l2); // l1 and l2 will have bigger values
+                return (double)(max(l1,l2)+min(r1,r2))/2.0; // even size
+            }
+            else if (l1>r2) high = mid1-1;
+            else low = mid1+1; // l2>r1
+        }
+        return 0; // dummy statement
+    }
+};
+
